@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-label="Annualized Yield vs Delta">
+<text x="380.0" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Annualized Yield vs Delta</text>
+<text x="380.0" y="48" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Synthetic sample chain; as of 2026-10-14; 20-45 DTE, delta 0.15-0.35</text>
+<line x1="80" x2="730" y1="390.0" y2="390.0" stroke="#475569"/>
+<text x="72" y="394.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0%</text>
+<line x1="80" x2="730" y1="298.5" y2="298.5" stroke="#475569"/>
+<text x="72" y="302.5" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">10%</text>
+<line x1="80" x2="730" y1="206.9" y2="206.9" stroke="#475569"/>
+<text x="72" y="210.9" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">20%</text>
+<line x1="80" x2="730" y1="115.4" y2="115.4" stroke="#475569"/>
+<text x="72" y="119.4" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">30%</text>
+<line x1="109.5" x2="109.5" y1="390" y2="395" stroke="#e2e8f0"/>
+<text x="109.5" y="409" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0.15</text>
+<line x1="257.3" x2="257.3" y1="390" y2="395" stroke="#e2e8f0"/>
+<text x="257.3" y="409" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0.20</text>
+<line x1="405.0" x2="405.0" y1="390" y2="395" stroke="#e2e8f0"/>
+<text x="405.0" y="409" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0.25</text>
+<line x1="552.7" x2="552.7" y1="390" y2="395" stroke="#e2e8f0"/>
+<text x="552.7" y="409" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0.30</text>
+<line x1="700.5" x2="700.5" y1="390" y2="395" stroke="#e2e8f0"/>
+<text x="700.5" y="409" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0.35</text>
+<line x1="80" x2="80" y1="70" y2="390" stroke="#e2e8f0"/>
+<line x1="80" x2="730" y1="390" y2="390" stroke="#e2e8f0"/>
+<text x="405.0" y="420" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Call Delta (Rough Probability of Assignment)</text>
+<text transform="translate(18 230.0) rotate(-90)" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Annualized Premium Yield</text>
+<circle cx="570.4" cy="93.7" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="691.6" cy="136.8" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="525.5" cy="179.5" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="350.6" cy="185.9" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="434.5" cy="218.2" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="591.1" cy="221.4" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<circle cx="328.2" cy="282.8" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<path d="M667.4 139.7 L675.4 147.7 M667.4 147.7 L675.4 139.7" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M498.4 141.4 L506.4 149.4 M498.4 149.4 L506.4 141.4" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M466.3 204.3 L474.3 212.3 M466.3 212.3 L474.3 204.3" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M266.5 226.3 L274.5 234.3 M266.5 234.3 L274.5 226.3" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M355.7 227.2 L363.7 235.2 M355.7 235.2 L363.7 227.2" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M162.0 249.9 L170.0 257.9 M162.0 257.9 L170.0 249.9" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M271.5 262.1 L279.5 270.1 M271.5 270.1 L279.5 262.1" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M389.2 263.3 L397.2 271.3 M389.2 271.3 L397.2 263.3" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M216.6 266.2 L224.6 274.2 M216.6 274.2 L224.6 266.2" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M498.5 273.6 L506.5 281.6 M498.5 281.6 L506.5 273.6" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M209.0 274.5 L217.0 282.5 M209.0 282.5 L217.0 274.5" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M111.3 292.0 L119.3 300.0 M111.3 300.0 L119.3 292.0" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M139.4 293.5 L147.4 301.5 M139.4 301.5 L147.4 293.5" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M229.6 296.1 L237.6 304.1 M229.6 304.1 L237.6 296.1" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<path d="M170.5 327.0 L178.5 335.0 M170.5 335.0 L178.5 327.0" stroke="#60a5fa" stroke-width="2" fill="none"/>
+<circle cx="90" cy="442" r="4" fill="#2dd4bf" fill-opacity="0.85"/>
+<text x="100" y="446" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Clean</text>
+<path d="M160 438 L168 446 M160 446 L168 438" stroke="#60a5fa" stroke-width="2"/>
+<text x="175" y="446" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Flagged (Earnings, Ex-Div, Wide Spread, Low OI or IV Mismatch)</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240" role="img" aria-label="Covered Call Screener: Ranks Covered-Call Candidates from an Option Chain, with Risk Flags">
+<text x="80" y="108" font-size="58" font-weight="bold" letter-spacing="2" fill="#60a5fa" font-family="Helvetica, Arial, sans-serif">Covered Call Screener</text>
+<line x1="80" y1="130" x2="240" y2="130" stroke="#2dd4bf" stroke-width="3"/>
+<text x="80" y="172" font-size="22" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Ranks Covered-Call Candidates from an Option Chain, with Risk Flags</text>
+<line x1="80" y1="200" x2="1120" y2="200" stroke="#475569" stroke-width="1"/>
+<text x="80" y="222" font-size="13" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Synthetic sample data; screening and education only, not investment advice</text>
+</svg>

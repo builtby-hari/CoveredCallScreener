@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 408" width="760" height="408" role="img" aria-label="SYND: Annualized Yield by Strike and Expiry">
+<text x="380.0" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">SYND: Annualized Yield by Strike and Expiry</text>
+<text x="380.0" y="48" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Synthetic sample data; every SYND call with delta 0.10-0.50; no flag filter</text>
+<text x="148.8" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">97.5</text>
+<text x="226.2" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">100</text>
+<text x="303.8" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">102.5</text>
+<text x="381.2" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">105</text>
+<text x="458.8" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">107.5</text>
+<text x="536.2" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">110</text>
+<text x="613.8" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">112.5</text>
+<text x="691.2" y="76" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">115</text>
+<text x="100" y="76" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Expiry / Strike</text>
+<text x="100" y="113.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2026-10-23</text>
+<rect x="111.0" y="85.0" width="75.5" height="48" rx="3" fill="#60a5fa"/>
+<text x="148.8" y="113.0" text-anchor="middle" font-size="11" fill="#0f172a" font-family="Helvetica, Arial, sans-serif">92.4%</text>
+<rect x="188.5" y="85.0" width="75.5" height="48" rx="3" fill="#436fa7"/>
+<text x="226.2" y="113.0" text-anchor="middle" font-size="11" fill="#0f172a" font-family="Helvetica, Arial, sans-serif">55.7%</text>
+<rect x="266.0" y="85.0" width="75.5" height="48" rx="3" fill="#304b6f"/>
+<text x="303.8" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">30.8%</text>
+<rect x="343.5" y="85.0" width="75.5" height="48" rx="3" fill="#24344c"/>
+<text x="381.2" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">15.2%</text>
+<rect x="421.0" y="85.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="458.8" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="498.5" y="85.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="536.2" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="576.0" y="85.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="613.8" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="653.5" y="85.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="691.2" y="113.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<text x="100" y="163.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2026-11-06</text>
+<rect x="111.0" y="135.0" width="75.5" height="48" rx="3" fill="#497ab8"/>
+<text x="148.8" y="163.0" text-anchor="middle" font-size="11" fill="#0f172a" font-family="Helvetica, Arial, sans-serif">63.3%</text>
+<rect x="188.5" y="135.0" width="75.5" height="48" rx="3" fill="#3b6090"/>
+<text x="226.2" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">45.5%</text>
+<rect x="266.0" y="135.0" width="75.5" height="48" rx="3" fill="#314d73"/>
+<text x="303.8" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">32.4%</text>
+<rect x="343.5" y="135.0" width="75.5" height="48" rx="3" fill="#293e5c"/>
+<text x="381.2" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">22.3%</text>
+<rect x="421.0" y="135.0" width="75.5" height="48" rx="3" fill="#24344b"/>
+<text x="458.8" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">14.9%</text>
+<rect x="498.5" y="135.0" width="75.5" height="48" rx="3" fill="#202d42"/>
+<text x="536.2" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">10.7%</text>
+<rect x="576.0" y="135.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="613.8" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="653.5" y="135.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="691.2" y="163.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<text x="100" y="213.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2026-11-20</text>
+<rect x="111.0" y="185.0" width="75.5" height="48" rx="3" fill="#406a9f"/>
+<text x="148.8" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">51.8%</text>
+<rect x="188.5" y="185.0" width="75.5" height="48" rx="3" fill="#375884"/>
+<text x="226.2" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">39.9%</text>
+<rect x="266.0" y="185.0" width="75.5" height="48" rx="3" fill="#314c71"/>
+<text x="303.8" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">31.7%</text>
+<rect x="343.5" y="185.0" width="75.5" height="48" rx="3" fill="#2a3f5e"/>
+<text x="381.2" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">23.0%</text>
+<rect x="421.0" y="185.0" width="75.5" height="48" rx="3" fill="#263751"/>
+<text x="458.8" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">17.3%</text>
+<rect x="498.5" y="185.0" width="75.5" height="48" rx="3" fill="#223147"/>
+<text x="536.2" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">13.1%</text>
+<rect x="576.0" y="185.0" width="75.5" height="48" rx="3" fill="#202d41"/>
+<text x="613.8" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">10.3%</text>
+<rect x="653.5" y="185.0" width="75.5" height="48" rx="3" fill="#1e293b"/>
+<text x="691.2" y="213.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">7.6%</text>
+<text x="100" y="263.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2026-12-04</text>
+<rect x="111.0" y="235.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="148.8" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="188.5" y="235.0" width="75.5" height="48" rx="3" fill="#385a87"/>
+<text x="226.2" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">41.4%</text>
+<rect x="266.0" y="235.0" width="75.5" height="48" rx="3" fill="#335179"/>
+<text x="303.8" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">35.1%</text>
+<rect x="343.5" y="235.0" width="75.5" height="48" rx="3" fill="#2e476a"/>
+<text x="381.2" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">28.3%</text>
+<rect x="421.0" y="235.0" width="75.5" height="48" rx="3" fill="#2b4160"/>
+<text x="458.8" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">24.0%</text>
+<rect x="498.5" y="235.0" width="75.5" height="48" rx="3" fill="#273a55"/>
+<text x="536.2" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">19.3%</text>
+<rect x="576.0" y="235.0" width="75.5" height="48" rx="3" fill="#24344d"/>
+<text x="613.8" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">15.5%</text>
+<rect x="653.5" y="235.0" width="75.5" height="48" rx="3" fill="#223147"/>
+<text x="691.2" y="263.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">12.8%</text>
+<text x="100" y="313.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2026-12-18</text>
+<rect x="111.0" y="285.0" width="75.5" height="48" fill="none" stroke="#475569" stroke-dasharray="3 3"/>
+<text x="148.8" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">-</text>
+<rect x="188.5" y="285.0" width="75.5" height="48" rx="3" fill="#365681"/>
+<text x="226.2" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">38.5%</text>
+<rect x="266.0" y="285.0" width="75.5" height="48" rx="3" fill="#324e74"/>
+<text x="303.8" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">33.0%</text>
+<rect x="343.5" y="285.0" width="75.5" height="48" rx="3" fill="#2d4667"/>
+<text x="381.2" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">27.1%</text>
+<rect x="421.0" y="285.0" width="75.5" height="48" rx="3" fill="#2a3f5d"/>
+<text x="458.8" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">22.8%</text>
+<rect x="498.5" y="285.0" width="75.5" height="48" rx="3" fill="#273b56"/>
+<text x="536.2" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">19.8%</text>
+<rect x="576.0" y="285.0" width="75.5" height="48" rx="3" fill="#25364f"/>
+<text x="613.8" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">16.7%</text>
+<rect x="653.5" y="285.0" width="75.5" height="48" rx="3" fill="#23334a"/>
+<text x="691.2" y="313.0" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">14.2%</text>
+<defs><linearGradient id="ramp" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>
+<rect x="110" y="358" width="240" height="10" rx="2" fill="url(#ramp)" stroke="#475569"/>
+<text x="110" y="384" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">7.6%</text>
+<text x="350" y="384" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">92.4%</text>
+<text x="366" y="367" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Annualized Yield (Blank = Outside Window)</text>
+</svg>

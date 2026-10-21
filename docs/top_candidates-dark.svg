@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-label="Top 10 Candidates by Annualized Yield">
+<text x="380.0" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Top 10 Candidates by Annualized Yield</text>
+<text x="380.0" y="48" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Synthetic sample chain; as of 2026-10-14; 20-45 DTE, delta 0.15-0.35</text>
+<line x1="250.0" x2="250.0" y1="70" y2="390" stroke="#475569"/>
+<text x="250.0" y="406" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">0%</text>
+<line x1="371.4" x2="371.4" y1="70" y2="390" stroke="#475569"/>
+<text x="371.4" y="406" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">10%</text>
+<line x1="492.8" x2="492.8" y1="70" y2="390" stroke="#475569"/>
+<text x="492.8" y="406" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">20%</text>
+<line x1="614.1" x2="614.1" y1="70" y2="390" stroke="#475569"/>
+<text x="614.1" y="406" text-anchor="middle" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">30%</text>
+<line x1="250" x2="250" y1="70" y2="390" stroke="#e2e8f0"/>
+<text x="240" y="90.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">1. SYND  2026-11-06  K102.5</text>
+<path d="M250.0 76.1 H638.9 Q642.9 76.1 642.9 80.1 V91.9 Q642.9 95.9 638.9 95.9 H250.0 Z" fill="#60a5fa"/>
+<text x="648.9" y="90.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">32.4%</text>
+<text x="240" y="122.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">2. SYNA  2026-11-06  K50</text>
+<path d="M250.0 108.1 H581.7 Q585.7 108.1 585.7 112.1 V123.9 Q585.7 127.9 581.7 127.9 H250.0 Z" fill="#60a5fa"/>
+<text x="591.7" y="122.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">27.7%</text>
+<text x="240" y="154.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">3. SYND  2026-11-20  K105</text>
+<path d="M250.0 140.1 H525.1 Q529.1 140.1 529.1 144.1 V155.9 Q529.1 159.9 525.1 159.9 H250.0 Z" fill="#60a5fa"/>
+<text x="535.1" y="154.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">23.0%</text>
+<text x="240" y="186.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">4. SYND  2026-11-06  K105</text>
+<path d="M250.0 172.1 H516.6 Q520.6 172.1 520.6 176.1 V187.9 Q520.6 191.9 516.6 191.9 H250.0 Z" fill="#60a5fa"/>
+<text x="526.6" y="186.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">22.3%</text>
+<text x="240" y="218.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">5. SYNA  2026-11-06  K51</text>
+<path d="M250.0 204.1 H473.8 Q477.8 204.1 477.8 208.1 V219.9 Q477.8 223.9 473.8 223.9 H250.0 Z" fill="#60a5fa"/>
+<text x="483.8" y="218.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">18.8%</text>
+<text x="240" y="250.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">6. SYNA  2026-11-20  K51</text>
+<path d="M250.0 236.1 H469.6 Q473.6 236.1 473.6 240.1 V251.9 Q473.6 255.9 469.6 255.9 H250.0 Z" fill="#60a5fa"/>
+<text x="479.6" y="250.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">18.4%</text>
+<text x="240" y="282.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">7. SYNC  2026-11-06  K360</text>
+<path d="M250.0 268.1 H388.2 Q392.2 268.1 392.2 272.1 V283.9 Q392.2 287.9 388.2 287.9 H250.0 Z" fill="#60a5fa"/>
+<text x="398.2" y="282.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">11.7%</text>
+<text x="240" y="314.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">8. SYNB  2026-11-20  K200</text>
+<path d="M250.0 300.1 H572.6 Q576.6 300.1 576.6 304.1 V315.9 Q576.6 319.9 572.6 319.9 H250.0 Z" fill="#2dd4bf"/>
+<text x="582.6" y="314.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">26.9%</text>
+<text x="240" y="346.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">9. SYNB  2026-11-06  K200</text>
+<path d="M250.0 332.1 H570.4 Q574.4 332.1 574.4 336.1 V347.9 Q574.4 351.9 570.4 351.9 H250.0 Z" fill="#2dd4bf"/>
+<text x="580.4" y="346.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">26.7%</text>
+<text x="240" y="378.0" text-anchor="end" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">10. SYNB  2026-11-20  K205</text>
+<path d="M250.0 364.1 H486.9 Q490.9 364.1 490.9 368.1 V379.9 Q490.9 383.9 486.9 383.9 H250.0 Z" fill="#2dd4bf"/>
+<text x="496.9" y="378.0" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">19.9%</text>
+<text x="470.0" y="424" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Annualized Yield (%), in Rank Order</text>
+<rect x="250" y="435" width="11" height="11" rx="2" fill="#60a5fa"/>
+<text x="267" y="444" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">No Flags</text>
+<rect x="340" y="435" width="11" height="11" rx="2" fill="#2dd4bf"/>
+<text x="357" y="444" font-size="11" fill="#e2e8f0" font-family="Helvetica, Arial, sans-serif">Has at Least One Flag</text>
+</svg>
