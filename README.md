@@ -17,6 +17,22 @@ before expiry, wide spreads, thin open interest, and price/vol mismatches).
 > and simulated prices. It illustrates the mechanics and says nothing about any
 > real security. Screening and education only, not investment advice.
 
+**Why it matters.** A covered call swaps upside above the strike for cash today, and the yield on the
+screen is only worth it if the downside cushion, the cap and the event risk are worth it too.
+
+Payoff at expiry per share for the top pick on the synthetic sample (SYND 2026-11-06, strike 102.5,
+spot 96.10, premium 1.96), from `ccscreen.charts.payoff_points`:
+
+| Price at Expiry | Stock Only | Covered Call |
+|---|---|---|
+| 85.00 | -11.10 | -9.14 |
+| 90.00 | -6.10 | -4.14 |
+| 94.14 (breakeven) | -1.96 | +0.00 |
+| 96.10 (spot) | +0.00 | +1.96 |
+| 100.00 | +3.90 | +5.86 |
+| 102.50 (strike) | +6.40 | +8.36 |
+| 110.00 | +13.90 | +8.36 (capped) |
+
 ## Contents
 
 - [Chart](#chart)
@@ -271,6 +287,12 @@ $$d_1 = \frac{\ln(S/K) + (r - q + \sigma^2/2)\,T}{\sigma\sqrt{T}}, \qquad d_2 = 
 $$N(x) = \tfrac{1}{2}\left(1 + \operatorname{erf}\!\left(\tfrac{x}{\sqrt{2}}\right)\right)$$
 
 Model gap is $\text{mid} - C(\sigma_{\text{row}})$, where $\sigma_{\text{row}}$ is the row's own `iv`.
+
+**Dividend yield.** $q$ is a continuous dividend yield (Merton's extension), set with `--div-yield` in percent
+and 0 by default. It matters most for covered calls on dividend stocks: a higher $q$ lowers the forward price,
+so it lowers delta and the call's price, and an ex-dividend date inside the window is also when an in-the-money
+short call is most likely to be assigned early (see `EX_DIV` and `EARLY_ASSIGN` below), which this European
+model does not price.
 
 **Delta as a probability proxy.** Delta is roughly the market's odds that the
 call finishes in the money, so `1 - delta` is a rough chance you keep the

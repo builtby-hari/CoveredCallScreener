@@ -67,6 +67,13 @@ class TestBlackScholes(unittest.TestCase):
     def test_dividend_yield_lowers_delta(self):
         self.assertLess(call_delta(100, 100, 0.5, 0.04, 0.3, 0.03), call_delta(100, 100, 0.5, 0.04, 0.3))
 
+    def test_merton_dividend_hand_checked(self):
+        # S=K=100, T=1, r=5%, q=3%, vol=20%: d1 = (0.05 - 0.03 + 0.02) / 0.2 = 0.2, d2 = 0
+        # delta = e^-0.03 * N(0.2) = 0.970446 * 0.579260 = 0.562140
+        # price = 100 * 0.562140 - 100 * e^-0.05 * 0.5 = 56.2140 - 47.5615 = 8.6525
+        self.assertAlmostEqual(call_delta(100, 100, 1, 0.05, 0.2, 0.03), 0.562140, places=5)
+        self.assertAlmostEqual(call_price(100, 100, 1, 0.05, 0.2, 0.03), 8.6525, places=3)
+
     def test_bad_inputs(self):
         with self.assertRaises(ValueError):
             call_delta(100, 100, 0, 0.04, 0.3)
@@ -523,6 +530,7 @@ class TestRoll(unittest.TestCase):
     def test_cli_roll_labels_output(self):
         import contextlib
         import io
+
         from cli import main
         with tempfile.TemporaryDirectory() as d:
             path = os.path.join(d, "c.csv")
@@ -535,6 +543,34 @@ class TestRoll(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertIn("Research estimate, not advice", buf.getvalue())
         self.assertIn("UNKNOWN", buf.getvalue())
+
+
+class TestCliErrors(unittest.TestCase):
+    def exits_with_usage_error(self, argv):
+        import contextlib
+        import io
+
+        from cli import main
+        # nested on purpose: parenthesized multi-context `with` needs 3.10 and the README promises 3.9+
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):  # noqa: SIM117
+            with self.assertRaises(SystemExit) as cm:
+                main(argv)
+        self.assertEqual(cm.exception.code, 2)
+
+    def test_missing_chain_file(self):
+        self.exits_with_usage_error(["no_such_chain.csv"])
+        self.exits_with_usage_error(["roll", "no_such_chain.csv", "--underlying", "X", "--strike", "1",
+                                     "--expiry", "2026-12-01", "--premium", "1"])
+
+    def test_inverted_windows(self):
+        self.exits_with_usage_error(["--min-dte", "50", "--max-dte", "10"])
+        self.exits_with_usage_error(["--min-delta", "2"])
+
+    def test_unwritable_output(self):
+        with tempfile.TemporaryDirectory() as d:
+            blocker = os.path.join(d, "file")
+            open(blocker, "w").close()
+            self.exits_with_usage_error(["--asof", "2026-01-05", "--csv", os.path.join(blocker, "out.csv")])
 
 
 if __name__ == "__main__":

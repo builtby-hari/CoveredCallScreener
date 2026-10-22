@@ -72,8 +72,14 @@ def money(x):
 
 
 def roll_main(argv):
-    a = build_roll_parser().parse_args(argv)
-    calls, warnings = load_chain(a.chain)
+    parser = build_roll_parser()
+    a = parser.parse_args(argv)
+    if a.contracts < 1:
+        parser.error("--contracts must be at least 1")
+    try:
+        calls, warnings = load_chain(a.chain)
+    except (OSError, ValueError) as e:
+        parser.error(str(e))
     pos = Position(a.underlying.upper(), a.strike, a.expiry, a.premium, a.contracts)
     r = roll_check(calls, pos, a.asof)
     n = a.contracts * 100
@@ -108,8 +114,12 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     if argv and argv[0] == "roll":
         return roll_main(argv[1:])
-    a = build_parser().parse_args(argv)
-    calls, warnings = load_chain(a.chain)
+    parser = build_parser()
+    a = parser.parse_args(argv)
+    try:
+        calls, warnings = load_chain(a.chain)
+    except (OSError, ValueError) as e:
+        parser.error(str(e))
     params = Params(asof=a.asof, rate=a.rate / 100, div_yield=a.div_yield / 100,
                     max_spread_pct=a.max_spread / 100, min_open_interest=a.min_oi, premium_basis=a.basis,
                     max_model_gap_pct=a.max_model_gap / 100,
@@ -117,6 +127,8 @@ def main(argv=None):
     win = dict(min_dte=a.min_dte, max_dte=a.max_dte, min_delta=a.min_delta, max_delta=a.max_delta)
     filt = preset_filters(a.preset, **win) if a.preset else Filters(**{k: v for k, v in win.items() if v is not None})
     filt.exclude_flagged, filt.exclude_earnings = a.exclude_flagged, a.exclude_earnings
+    if filt.min_dte > filt.max_dte or not 0 <= filt.min_delta <= filt.max_delta <= 1:
+        parser.error("need min DTE <= max DTE and 0 <= min delta <= max delta <= 1")
     results = screen(calls, params, filt)
 
     print(f"Covered-call screen as of {a.asof}  |  {len(calls)} calls loaded, {len(results)} pass "
@@ -133,14 +145,15 @@ def main(argv=None):
     else:
         print("No calls passed the filters.")
     print("\nScreening/education tool only. Not investment advice. Synthetic sample data unless you supply your own.")
-    if a.csv:
-        os.makedirs(os.path.dirname(os.path.abspath(a.csv)), exist_ok=True)
-        write_csv(results, a.csv)
-        print("wrote", a.csv)
-    if a.svg:
-        os.makedirs(os.path.dirname(os.path.abspath(a.svg)), exist_ok=True)
-        write_svg(results, a.svg)
-        print("wrote", a.svg)
+    for path, write in ((a.csv, write_csv), (a.svg, write_svg)):
+        if not path:
+            continue
+        try:
+            os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+            write(results, path)
+        except OSError as e:
+            parser.error(f"could not write {path}: {e}")
+        print("wrote", path)
     return 0
 
 
