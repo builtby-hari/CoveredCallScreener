@@ -15,6 +15,18 @@ class Filters:
     min_delta: float = 0.15
     max_delta: float = 0.35
     exclude_flagged: bool = False   # drop any call carrying a flag
+    exclude_earnings: bool = False  # drop calls whose window contains an earnings date
+
+
+# Named filter windows the owner can edit. "weekly" targets the nearest weekly expiries.
+PRESETS = {"weekly": {"min_dte": 3, "max_dte": 10, "min_delta": 0.15, "max_delta": 0.35}}
+
+
+def preset_filters(name: str, **overrides) -> Filters:
+    """Filters for a named preset; any non-None override replaces the preset value."""
+    vals = dict(PRESETS[name])
+    vals.update({k: v for k, v in overrides.items() if v is not None})
+    return Filters(**vals)
 
 
 def passes(r: Result, f: Filters) -> bool:
@@ -25,6 +37,8 @@ def passes(r: Result, f: Filters) -> bool:
     if not (f.min_delta <= r.delta <= f.max_delta):
         return False
     if f.exclude_flagged and r.flags:
+        return False
+    if f.exclude_earnings and "EARNINGS" in r.flags:
         return False
     return True
 
@@ -43,7 +57,7 @@ def screen(calls: List[Call], params: Params, filters: Filters) -> List[Result]:
 CSV_COLUMNS = ["rank", "underlying", "expiry", "dte", "strike", "spot", "bid", "ask", "mid",
                "spread_pct", "delta", "delta_source", "model_price", "model_gap", "static_return", "annualized_yield",
                "if_called_return", "if_called_annualized", "breakeven", "downside_cushion",
-               "upside_to_strike", "open_interest", "volume", "flags"]
+               "upside_to_strike", "open_interest", "volume", "flags", "prob_assigned"]
 
 
 def write_csv(results: List[Result], path):
@@ -58,4 +72,4 @@ def write_csv(results: List[Result], path):
                         f"{r.static_return:.5f}", f"{r.annualized_yield:.5f}",
                         f"{r.if_called_return:.5f}", f"{r.if_called_annualized:.5f}",
                         f"{r.breakeven:.2f}", f"{r.downside_cushion:.5f}", f"{r.upside_to_strike:.5f}",
-                        c.open_interest, c.volume, "|".join(r.flags)])
+                        c.open_interest, c.volume, "|".join(r.flags), f"{r.prob_assigned:.4f}"])

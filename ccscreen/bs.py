@@ -28,3 +28,9 @@ def call_price(spot, strike, t_years, rate, vol, div_yield=0.0):
     d1, d2 = d1_d2(spot, strike, t_years, rate, vol, div_yield)
     return (spot * math.exp(-div_yield * t_years) * norm_cdf(d1)
             - strike * math.exp(-rate * t_years) * norm_cdf(d2))
+
+
+def call_itm_prob(spot, strike, t_years, rate, vol, div_yield=0.0):
+    """Risk-neutral probability a European call finishes in the money: N(d2). Below delta (N(d1))."""
+    _, d2 = d1_d2(spot, strike, t_years, rate, vol, div_yield)
+    return norm_cdf(d2)

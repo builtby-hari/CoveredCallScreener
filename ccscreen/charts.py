@@ -306,7 +306,7 @@ def terminal_svg(lines, title="Terminal", dark=False):
     """Terminal-window rendering of plain text output (monospace, rounded window, three dots)."""
     c = _pal(dark)
     lh, top = 18, 56
-    w = 1000
+    w = 1060
     h = top + len(lines) * lh + 28
     body = "#f8fafc" if not dark else "#0f172a"
     bar = "#e2e8f0" if not dark else "#1e293b"

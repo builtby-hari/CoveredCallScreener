@@ -5,7 +5,7 @@
   </picture>
 </p>
 
-![Python](https://img.shields.io/badge/python-3.9%2B-1f3a5f) ![Tests](https://img.shields.io/badge/tests-50%20passing-14b8a6) ![Dependencies](https://img.shields.io/badge/dependencies-none-1f3a5f) ![License](https://img.shields.io/badge/license-MIT-14b8a6)
+![Python](https://img.shields.io/badge/python-3.9%2B-1f3a5f) ![Dependencies](https://img.shields.io/badge/dependencies-none-1f3a5f) ![License](https://img.shields.io/badge/license-MIT-14b8a6)
 
 A small, dependency-free Python tool that reads an option-chain CSV and ranks
 covered-call candidates: premium yield, breakeven, if-called return, a
@@ -25,6 +25,7 @@ before expiry, wide spreads, thin open interest, and price/vol mismatches).
 - [Quickstart](#quickstart)
 - [Charts](#charts)
 - [Sample Output](#sample-output)
+- [Presets, Earnings Exclusion and Roll Check](#presets-earnings-exclusion-and-roll-check)
 - [Methodology](#methodology)
 - [Optional: Matplotlib Plots](#optional-matplotlib-plots)
 - [Skills Shown](#skills-shown)
@@ -45,7 +46,7 @@ before expiry, wide spreads, thin open interest, and price/vol mismatches).
 
 ## Results at a Glance
 
-Synthetic sample, as of 2026-10-14, default filters (DTE 20-45, delta 0.15-0.35):
+Synthetic sample, as of 2026-10-14, default filters (DTE 20 to 45, delta 0.15 to 0.35):
 
 | Measure | Value |
 |---|---|
@@ -55,7 +56,7 @@ Synthetic sample, as of 2026-10-14, default filters (DTE 20-45, delta 0.15-0.35)
 | Top-Ranked Call | SYND 2026-11-06, strike 102.5, 32.4% annualized, delta 0.306 |
 | Top Pick Breakeven / If-Called Return | 94.14 / +8.70% |
 
-- Row 8 (SYNB) has a 26.9% annualized yield but ranks below rows 5-7 because of the EARNINGS flag. Flagged calls always sit below unflagged ones.
+- Row 8 (SYNB) has a 26.9% annualized yield but ranks below rows 5 to 7 because of the EARNINGS flag. Flagged calls always sit below unflagged ones.
 
 ## How It Works
 
@@ -75,9 +76,15 @@ flowchart LR
   if-called return, downside breakeven, delta.
 - Uses the vendor `delta` column if present; otherwise computes Black-Scholes
   delta from `iv`, a risk-free rate, and an optional dividend yield.
-- Flags `EARNINGS`, `EX_DIV`, `WIDE_SPREAD`, `LOW_OI`, and `IV_MISMATCH` (a quote whose price and
-  implied vol disagree, which points to a stale or inconsistent row).
-- Skips calls that expire on or before the as-of date instead of failing on them.
+- Flags `EARNINGS`, `EX_DIV`, `EARLY_ASSIGN` (a rule-of-thumb early-assignment warning; see Flags below),
+  `WIDE_SPREAD`, `LOW_OI`, `LOW_VOLUME` and `THIN_PREMIUM` (both off unless you set a threshold),
+  and `IV_MISMATCH` (a quote whose price and implied vol disagree, which points to a stale or inconsistent row).
+- Adds `prob_assigned` to the CSV and the table (`P(asn)%`): the risk-neutral chance the call finishes in the money,
+  N(d2) at the row's `iv`. With no dividend yield it sits below delta (N(d1)); with a dividend yield it can sit above
+  the delta column, so do not read it as a strict upper bound on delta. It is model-based (lognormal, constant vol),
+  not a forecast.
+- Prints `Cush%` in the table: the downside cushion, premium divided by spot, as a percent (`downside_cushion` in the CSV).
+- Skips rows with `nan`/`inf` numbers (with a warning) and calls that expire on or before the as-of date instead of failing on them.
 - Filters by DTE and delta, ranks, prints a table, writes a CSV and an SVG.
 - Makes no network calls: you supply the chain CSV.
 
@@ -89,6 +96,8 @@ Requires Python 3.9+. No `pip install` needed for the core.
 python3 cli.py --asof 2026-10-14                       # bundled synthetic chain, default filters
 python3 cli.py --asof 2026-10-14 --min-delta 0.10 --max-delta 0.30 --min-dte 30 --max-dte 60
 python3 cli.py my_chain.csv --rate 4.25 --min-oi 250 --max-spread 8 --exclude-flagged
+python3 cli.py my_chain.csv --preset weekly --exclude-earnings    # weekly expiries, no earnings in window
+python3 cli.py my_chain.csv --min-volume 50 --min-premium 0.25   # optional liquidity cutoffs (off by default)
 python3 cli.py --asof 2026-10-14 --csv output/screen.csv --svg output/yield_vs_delta.svg
 python3 -m unittest discover -v                        # run the tests
 python3 charts.py                                      # regenerate every SVG in docs/ (light and dark)
@@ -102,13 +111,15 @@ output below.
 
 **Input columns:** `underlying, spot, expiry, strike, bid, ask, iv,
 open_interest, volume` (required) and `delta, ex_dividend_date,
-earnings_date` (optional). Dates are `YYYY-MM-DD`; `iv` is a decimal
-(0.32 = 32%). Lines starting with `#` are treated as comments.
+earnings_date, dividend` (optional). `dividend` is the next cash dividend per share;
+it feeds the `EARLY_ASSIGN` check, and negative values are skipped with a warning. Dates are `YYYY-MM-DD`; `iv` is a decimal
+(0.32 = 32%). A row with `iv` above 5 is skipped with a warning, because it is almost certainly a percent typed
+as a number (32 instead of 0.32); the screener never rescales it. A vendor `delta` outside 0 to 1 is also skipped with a warning. Lines starting with `#` are treated as comments.
 
 ## Charts
 
-Five charts in total. The scatter above is the hero. All are synthetic-sample
-charts. Each has a light and a dark SVG, and all are regenerated by `python3 charts.py`.
+There are five charts, and the scatter above is the hero. All use the synthetic sample.
+Each has a light and a dark SVG, and `python3 charts.py` regenerates all of them.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/top_candidates-dark.svg">
@@ -152,27 +163,86 @@ charts. Each has a light and a dark SVG, and all are regenerated by `python3 cha
 Covered-call screen as of 2026-10-14  |  228 calls loaded, 22 pass (DTE 20-45, delta 0.15-0.35, rate 4%, premium=mid)
 7 unflagged, 15 flagged. Unflagged rank first, then by annualized yield.
 
- # Sym  Expiry      DTE  Strike    Mid  Sprd%  Delta Static%   Ann% Called%     B/E    OI  Flags
- 1 SYND 2026-11-06   23   102.5   1.96    6.1  0.306    2.04   32.4    8.70   94.14   660  -
- 2 SYNA 2026-11-06   23      50   0.84    4.8  0.347    1.74   27.7    5.48   47.36  1949  -
- 3 SYND 2026-11-20   37     105   2.24    8.0  0.291    2.33   23.0   11.59   93.86   210  -
- 4 SYND 2026-11-06   23     105   1.35    8.9  0.232    1.40   22.3   10.67   94.75   154  -
- 5 SYNA 2026-11-06   23      51   0.57    7.0  0.260    1.18   18.8    6.99   47.63  2244  -
- 6 SYNA 2026-11-20   37      51   0.90    6.7  0.313    1.87   18.4    7.68   47.30  2281  -
- 7 SYNC 2026-11-06   23     360   2.53    4.7  0.224    0.74   11.7    5.76  340.27  1308  -
- 8 SYNB 2026-11-20   37     200   5.11    5.9  0.340    2.73   26.9    9.48  182.24  2359  EARNINGS
- 9 SYNB 2026-11-06   23     200   3.16    6.0  0.283    1.68   26.7    8.44  184.19  1829  EARNINGS
-10 SYNB 2026-11-20   37     205   3.77    8.0  0.272    2.01   19.9   11.43  183.58  1165  EARNINGS
-11 SYNB 2026-11-06   23     205   2.06    8.7  0.204    1.10   17.4   10.52  185.29  2011  EARNINGS
-12 SYND 2026-11-20   37   107.5   1.69   10.7  0.235    1.76   17.3   13.62   94.41    87  WIDE_SPREAD,LOW_OI
-13 SYND 2026-11-06   23   107.5   0.90   11.1  0.169    0.94   14.9   12.80   95.20   206  WIDE_SPREAD
-14 SYNB 2026-11-20   37     210   2.57   10.1  0.206    1.37   13.5   13.46  184.78  1054  EARNINGS,WIDE_SPREAD
-15 SYNA 2026-11-20   37      52   0.66   10.7  0.246    1.36   13.4    9.24   47.55   830  WIDE_SPREAD
+ # Sym  Expiry      DTE  Strike    Mid  Sprd%  Delta Static%   Ann% Called%     B/E  Cush% P(asn)%    OI  Flags
+ 1 SYND 2026-11-06   23   102.5   1.96    6.1  0.306    2.04   32.4    8.70   94.14   2.04    26.8   660  -
+ 2 SYNA 2026-11-06   23      50   0.84    4.8  0.347    1.74   27.7    5.48   47.36   1.74    31.8  1949  -
+ 3 SYND 2026-11-20   37     105   2.24    8.0  0.291    2.33   23.0   11.59   93.86   2.33    24.6   210  -
+ 4 SYND 2026-11-06   23     105   1.35    8.9  0.232    1.40   22.3   10.67   94.75   1.40    20.0   154  -
+ 5 SYNA 2026-11-06   23      51   0.57    7.0  0.260    1.18   18.8    6.99   47.63   1.18    23.4  2244  -
+ 6 SYNA 2026-11-20   37      51   0.90    6.7  0.313    1.87   18.4    7.68   47.30   1.87    27.8  2281  -
+ 7 SYNC 2026-11-06   23     360   2.53    4.7  0.224    0.74   11.7    5.76  340.27   0.74    20.6  1308  -
+ 8 SYNB 2026-11-20   37     200   5.11    5.9  0.340    2.73   26.9    9.48  182.24   2.73    29.4  2359  EARNINGS
+ 9 SYNB 2026-11-06   23     200   3.16    6.0  0.283    1.68   26.7    8.44  184.19   1.68    25.0  1829  EARNINGS
+10 SYNB 2026-11-20   37     205   3.77    8.0  0.272    2.01   19.9   11.43  183.58   2.01    23.1  1165  EARNINGS
+11 SYNB 2026-11-06   23     205   2.06    8.7  0.204    1.10   17.4   10.52  185.29   1.10    17.7  2011  EARNINGS
+12 SYND 2026-11-20   37   107.5   1.69   10.7  0.235    1.76   17.3   13.62   94.41   1.76    19.5    87  WIDE_SPREAD,LOW_OI
+13 SYND 2026-11-06   23   107.5   0.90   11.1  0.169    0.94   14.9   12.80   95.20   0.94    14.3   206  WIDE_SPREAD
+14 SYNB 2026-11-20   37     210   2.57   10.1  0.206    1.37   13.5   13.46  184.78   1.37    17.2  1054  EARNINGS,WIDE_SPREAD
+15 SYNA 2026-11-20   37      52   0.66   10.7  0.246    1.36   13.4    9.24   47.55   1.36    21.6   830  WIDE_SPREAD
 
 Screening/education tool only. Not investment advice. Synthetic sample data unless you supply your own.
 ```
 
 </details>
+
+## Presets, Earnings Exclusion and Roll Check
+
+**Weekly preset.** `--preset weekly` swaps the default window for weekly expiries: DTE 3 to 10 and the same delta
+band (0.15 to 0.35). The window is a starting point, not a rule; edit `PRESETS` in `ccscreen/screen.py` or override
+any value on the command line (`--preset weekly --max-dte 14`). With no preset the defaults (DTE 20 to 45,
+delta 0.15 to 0.35) are unchanged.
+
+**Earnings exclusion.** `--exclude-earnings` drops any call whose window contains an earnings date (the same
+test as the `EARNINGS` flag, as-of date through expiry). It is off by default, so flagged calls normally stay
+in the table. A call with no `earnings_date` in the file cannot be checked, so it is kept.
+
+```bash
+python3 cli.py --asof 2026-10-14 --preset weekly --exclude-earnings --top 3
+```
+
+```
+Covered-call screen as of 2026-10-14  |  228 calls loaded, 5 pass (DTE 3-10, delta 0.15-0.35, rate 4%, premium=mid)
+5 unflagged, 0 flagged. Unflagged rank first, then by annualized yield.
+
+ # Sym  Expiry      DTE  Strike    Mid  Sprd%  Delta Static%   Ann% Called%     B/E  Cush% P(asn)%    OI  Flags
+ 1 SYND 2026-10-23    9     100   1.32    4.5  0.308    1.37   55.7    5.43   94.78   1.37    28.3   408  -
+ 2 SYNB 2026-10-23    9     195   1.75    4.6  0.266    0.93   37.9    5.02  185.60   0.93    24.6  4309  -
+ 3 SYND 2026-10-23    9   102.5   0.73    8.2  0.198    0.76   30.8    7.42   95.37   0.76    17.8   405  -
+
+Screening/education tool only. Not investment advice. Synthetic sample data unless you supply your own.
+```
+
+**Roll check.** `python3 cli.py roll` is a read-only look at one open short call. Give it the chain CSV, the
+as-of date, and the position (`--underlying`, `--strike`, `--expiry`, `--premium` received per share,
+`--contracts`). It reports the buyback cost (the ask), intrinsic vs extrinsic value, assignment risk signals
+(in the money, DTE, earnings before expiry, and an ex-dividend date before expiry with extrinsic below the
+dividend), and roll candidates: later expiry, same or higher strike. Net roll credit is the new bid minus the
+buyback ask, a conservative fill. Candidates rank by net credit per extra day of duration; if-called return is
+(premium received + net roll credit + new strike - spot) / spot. A candidate with no usable quote, or any
+candidate when the open call is missing from the chain, is UNKNOWN and not ranked.
+
+```bash
+python3 cli.py roll data/sample_chain.csv --asof 2026-10-14 --underlying SYND --strike 100 --expiry 2026-10-23 --premium 1.20 --contracts 2 --top 3
+```
+
+```
+Roll check as of 2026-10-14: SYND 2x short 100 call expiring 2026-10-23, premium received 1.20/share
+Research estimate, not advice.
+
+Spot 96.10  |  Buyback (ask) 1.35  |  Intrinsic 0.00  |  Extrinsic 1.35
+Buyback total 270.00; P/L if closed now -30.00
+Assignment risk signals:
+  - Not ITM
+  - DTE 9
+
+Roll candidates (later expiry, strike >= 100), ranked by net credit per extra day; net = new bid - buyback ask:
+ # Expiry      DTE  Strike  NewBid  Net/sh Net total  Called%
+ 1 2026-12-04   51     100    5.45   +4.10   +820.00     9.57
+ 2 2026-11-06   23     100    2.70   +1.35   +270.00     6.71
+ 3 2026-12-18   65     100    6.45   +5.10  +1020.00    10.61
+
+Research estimate, not advice. Uses ask to buy back and bid to sell. Ignores commissions, taxes, dividends.
+```
 
 ## Methodology
 
@@ -212,10 +282,24 @@ neither is a forecast. An at-the-money call has delta a bit above 0.5
 plus the share price up to the strike, flat above it. The teal dashed line is the stock
 alone. Dividends, early exercise and commissions are ignored.
 
-**Flags.** `EARNINGS` and `EX_DIV` fire when the event date is after the as-of
-date and on or before expiry. An ex-dividend date matters because in-the-money
-calls are often exercised early just before it. `WIDE_SPREAD` fires when
-spread % of mid exceeds the cap (default 10%); `LOW_OI` when open interest is
+**Flags.** `EX_DIV` fires when the ex-dividend date is after the as-of date and on
+or before expiry. An ex-dividend date matters because in-the-money calls are often
+exercised early just before it. `EARNINGS` fires from the as-of date itself through
+expiry, inclusive, because a report on the as-of date may come after the close.
+
+`EARLY_ASSIGN` is a rule of thumb, not a prediction. It fires when all of these hold: the call is in the money,
+the ex-dividend date falls inside the window, the dividend is set in the `dividend` column, and the extrinsic
+value (mid minus intrinsic value, i.e., the time value left in the premium) is below that dividend. The logic:
+a holder can capture the dividend by exercising, and a short call whose remaining time value is smaller than the
+dividend is at risk of being assigned just before ex-date. Sources on the mechanics:
+[dividend yield effects on covered call strategies](https://thetaedge.ai/blog/dividend-yield-effects-covered-call-strategies)
+and [Schwab on options assignment risk](https://www.schwab.com/learn/story/risks-options-assignment). Real
+exercise decisions also depend on the holder's behavior, bid/ask, and broker rules, so treat the flag as a reason to check, not a verdict.
+
+`LOW_VOLUME` (`--min-volume`) and `THIN_PREMIUM` (`--min-premium`, premium per share) are liquidity cutoffs you
+set yourself. There is no universal standard for "too thin," so both are off by default (threshold 0).
+
+`WIDE_SPREAD` fires when spread % of mid exceeds the cap (default 10%); `LOW_OI` when open interest is
 below the minimum (default 100). `IV_MISMATCH` fires when the quote's mid differs from the
 Black-Scholes price at the row's own `iv` by more than 10% of mid **and** more than $0.05 (the dollar
 floor ignores penny rounding on cheap options; change the percentage with `--max-model-gap`).
@@ -257,8 +341,8 @@ Python · Options pricing · Black-Scholes · Data screening · Data visualizati
   if-called return.
 - Mid is an optimistic fill on wide markets; `--basis bid` is the conservative
   alternative.
-- A single call leg per row. No portfolio view, no position sizing, no
-  rolling logic, no cash-secured puts.
+- A single call leg per row. No portfolio view, no position sizing and no
+  cash-secured puts. The roll check is read-only: it ranks candidates but does not manage the position.
 - The sample data is synthetic and the chain is a snapshot, not a live feed.
   Every chart is built from it.
 - The model gap tests internal consistency only (see above). It does not say whether the option is
@@ -281,7 +365,8 @@ Python · Options pricing · Black-Scholes · Data screening · Data visualizati
 ccscreen/bs.py          normal CDF, Black-Scholes price and delta
 ccscreen/models.py      Call dataclass, CSV loader with validation
 ccscreen/metrics.py     per-call metrics and flags
-ccscreen/screen.py      filters, ranking, CSV writer
+ccscreen/screen.py      filters, presets, ranking, CSV writer
+ccscreen/roll.py        read-only roll check for an open short call
 ccscreen/charts.py      hand-written SVG charts (light and dark)
 cli.py                  command line interface
 charts.py               regenerates every SVG in docs/
