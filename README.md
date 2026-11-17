@@ -1,5 +1,7 @@
 # Covered Call Screener
 
+[![tests](https://github.com/builtby-hari/CoveredCallScreener/actions/workflows/tests.yml/badge.svg)](https://github.com/builtby-hari/CoveredCallScreener/actions/workflows/tests.yml) ![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 If you own 100 shares, which call option should you sell against them? This reads an option chain, ranks the candidates, and flags the ones with a catch.
 
 On the sample chain (synthetic, fictional tickers), the top pick pays **2.04% in 23 days, about 32% annualized**, and the shares only get sold if the stock rises more than 6.7%.
@@ -84,6 +86,12 @@ And how delta changes with strike and time, which is why the screener filters on
 ![Heatmap of Black-Scholes call delta across strike (85 to 115 dollars) and days to expiry (3 to 90), with contour lines at deltas 0.15, 0.25 and 0.35](docs/figures/delta_surface.png)
 
 ## Run it
+
+Try it in one line. No installs, it runs on the sample data:
+
+```bash
+git clone https://github.com/builtby-hari/CoveredCallScreener.git && cd CoveredCallScreener && python3 cli.py --asof 2026-10-14
+```
 
 Python 3.9+. No installs needed for the screener.
 
